@@ -21,6 +21,36 @@ code {
   padding: 5px;
 }
 
+.tosInput {
+  align-items: center;
+}
+
 .formInput div {
   width: 80px;
+}
+
+button {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #600060;
+  padding: 0.5% 2%;
+  background-color: white;
+  border: 2px solid #600060;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.tosDetails {
+  width: 300px;
+  padding: 5px;
+  margin: 10px 0;
+  background-color: #EBD5B3;
+}
+
+.tosDetails p {
+  font-size: 0.8rem;
+}
+
+#tosToggle {
+  display: none;
 }
