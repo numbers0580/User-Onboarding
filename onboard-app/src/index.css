@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  padding: 0.5% 2%;
+}
+
+.formInput, .tosInput {
+  display: flex;
+  padding: 5px;
+}
+
+.tosInput {
+  align-items: center;
+}
+
+.formInput div {
+  width: 80px;
+}
+
+button {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #600060;
+  padding: 0.5% 2%;
+  background-color: white;
+  border: 2px solid #600060;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.tosDetails {
+  width: 300px;
+  padding: 5px;
+  margin: 10px 0;
+  background-color: #EBD5B3;
+}
+
+.tosDetails p {
+  font-size: 0.8rem;
+}
+
+.errorMessages {
+  color: red;
+}
+
+.userCard {
+  width: 600px;
+  margin-top: 20px;
+  padding: 0 10px;
+  border: 2px solid #008000;
+  border-radius: 20px;
+  background-color: #44CC44;
+  box-shadow: -5px 10px 10px #004000;
+  color: white;
+}
