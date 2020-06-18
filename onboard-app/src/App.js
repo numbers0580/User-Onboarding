@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Form from './Form';
+//import formSchema from '../validation/formSchema';
 import axios from 'axios';
 import {v4} from 'uuid';
 import * as yup from 'yup';
@@ -19,17 +20,67 @@ function App() {
   const [isDisabled, changeDisabled] = useState(initDisabled);
 
   const getUsers = function() {
-    axios.get()
+    axios.get('https://reqres.in/api/users')
       .then(fetched => {
-        setUsers([...users, fetched.data]);
+        setUsers(fetched.data);
       })
       .catch(errorMsg => {
         debugger
         console.log('Error getting Users');
       })
+  };
+
+  const postUsers = function(newUser) {
+    axios.post('https://reqres.in/api/users', newUser)
+      .then(shipped => {
+        setUsers([...users, shipped.data]);
+      })
+      .catch(shipError => {
+        debugger
+        console.log('Error in adding user to List');
+      })
       .finally(evt => {
         updateEntries(defaultValues);
       })
+  };
+
+  const changedInput = function(event) {
+    const {name, value} = event.target;
+
+    yup
+      .reach(formSchema, name)
+      .validate(value)
+      .then(() => {
+        updateErrors({...formErrors, [name]: ""});
+      })
+      .catch(err => {
+        updateErrors({...formErrors, [name]: err.errors[0]});
+      })
+
+    updateEntries({...formEntries, [name]: value});
+  };
+
+  const formSchema = yup.object().shape({
+    uName: yup
+      .string()
+      .min(4, "Username must be at least 4 characters")
+      .required("Username is required"),
+    uEmail: yup
+      .string()
+      .email("Please enter a valid email address")
+      .required("An email address is required"),
+    uPass: yup
+      .string()
+      .min(8, "Passwords must be at least 8 characters long")
+      .required("A password is required"),
+    tosAccept: yup
+      .boolean()
+      .oneOf([true], "Have you agreed to the Terms of Service?")
+  });
+
+  const checkingBoxes = function(evt) {
+    const {name, checked} = evt.target;
+    updateEntries({...formEntries, [name]:checked});
   };
 
   const clickedSubmit = function(submitEvent) {
@@ -42,12 +93,20 @@ function App() {
       uPass: formEntries.uPass.trim(),
       tosAccept: formEntries.tosAccept
     };
+
+    postUsers(newEntry);
   };
+
+  useEffect(() => {
+    formSchema.isValid(formEntries).then(valid => {
+      changeDisabled(!valid);
+    })
+  }, [formEntries]);
 
   return (
     <div className="App">
       <h2>Add New User</h2>
-      <Form disability={isDisabled} formSubmit={clickedSubmit}/>
+      <Form entries={formEntries} inputChange={changedInput} checkboxInput={checkingBoxes} idTenT={formErrors} disability={isDisabled} formSubmit={clickedSubmit}/>
       {/* <div className="tosDetails" id="tosToggle">
         <h3>Terms of Service</h3>
         <p> You agree to this standard boilerplate... blah blah blah... first-born child or equivalent... more technical jargon gibberish...
