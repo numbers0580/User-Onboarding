@@ -51,6 +51,17 @@ button {
   font-size: 0.8rem;
 }
 
-#tosToggle {
-  display: none;
+.errorMessages {
+  color: red;
+}
+
+.userCard {
+  width: 600px;
+  margin-top: 20px;
+  padding: 0 10px;
+  border: 2px solid #008000;
+  border-radius: 20px;
+  background-color: #44CC44;
+  box-shadow: -5px 10px 10px #004000;
+  color: white;
 }

@@ -6,7 +6,7 @@ function Form(props) {
     return (
         <form className="formulator" onSubmit={formSubmit}>
             <div className='formInput'>
-               <div><label>Name:</label></div>
+               <div><label>Username:</label></div>
                <div><input type="text" name="uName" value={entries.uName} maxLength="15" onChange={inputChange} /></div>
             </div>
             <div className='formInput'>
@@ -26,10 +26,15 @@ function Form(props) {
             <div className="tosDetails" id="tosToggle">
                <h3>Terms of Service</h3>
                <p> You agree to this standard boilerplate... blah blah blah... first-born child or equivalent... more technical jargon gibberish...
-               Our cookies will end up knowing things about you that you've forgotten, and they will be better parents to your kids than you... SkyNet is real (not even joking, 
-               look it up)... Resistance is Futile! All praise HAL 9000!</p>
+               Our cookies will end up knowing things about you that even you've forgotten, and they will be better parents to your kids than you... SkyNet is real (not even 
+               joking, look it up)... Resistance is Futile! All praise HAL 9000!</p>
             </div>
-            <div className="errorMessages"></div>
+            <div className="errorMessages">
+               <div>{idTenT.uName}</div>
+               <div>{idTenT.uEmail}</div>
+               <div>{idTenT.uPass}</div>
+               <div>{idTenT.tosAccept}</div>
+            </div>
         </form>
     );
 };
