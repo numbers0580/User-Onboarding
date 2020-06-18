@@ -13,7 +13,25 @@ const defaultErrors = {uName: '', uEmail: '', uPass: '', tosAccept: ''};
 const initUsers = [];
 const initDisabled = true;
 
-function App() {
+const formSchema = yup.object().shape({
+  uName: yup
+    .string()
+    .min(4, "Username must be at least 4 characters")
+    .required("Username is required"),
+  uEmail: yup
+    .string()
+    .email("Please enter a valid email address")
+    .required("An email address is required"),
+  uPass: yup
+    .string()
+    .min(8, "Passwords must be at least 8 characters long")
+    .required("A password is required"),
+  tosAccept: yup
+    .boolean()
+    .oneOf([true], "Have you agreed to the Terms of Service?")
+});
+
+function Apptwo() {
   const [users, setUsers] = useState(initUsers);
   const [formEntries, updateEntries] = useState(defaultValues);
   const [formErrors, updateErrors] = useState(defaultErrors);
@@ -31,8 +49,10 @@ function App() {
   };
 
   const postUsers = function(newUser) {
+    debugger
     axios.post('https://reqres.in/api/users', newUser)
       .then(shipped => {
+        debugger
         setUsers([...users, shipped.data]);
       })
       .catch(shipError => {
@@ -40,9 +60,12 @@ function App() {
         console.log('Error in adding user to List');
       })
       .finally(evt => {
+        debugger
         updateEntries(defaultValues);
       })
   };
+  console.log('Final test on users', users);
+  //So I was successfully able to get the newUser added to the users[] array, but I still can't see it in the api
 
   const changedInput = function(event) {
     const {name, value} = event.target;
@@ -59,24 +82,6 @@ function App() {
 
     updateEntries({...formEntries, [name]: value});
   };
-
-  const formSchema = yup.object().shape({
-    uName: yup
-      .string()
-      .min(4, "Username must be at least 4 characters")
-      .required("Username is required"),
-    uEmail: yup
-      .string()
-      .email("Please enter a valid email address")
-      .required("An email address is required"),
-    uPass: yup
-      .string()
-      .min(8, "Passwords must be at least 8 characters long")
-      .required("A password is required"),
-    tosAccept: yup
-      .boolean()
-      .oneOf([true], "Have you agreed to the Terms of Service?")
-  });
 
   const checkingBoxes = function(evt) {
     const {name, checked} = evt.target;
@@ -137,4 +142,4 @@ function linkButton() {
    }
 }
 
-export default App;
+export default Apptwo;
