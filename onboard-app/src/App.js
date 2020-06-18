@@ -46,25 +46,25 @@ function App() {
         setUsers(fetched.data);
       })
       .catch(errorMsg => {
-        debugger
+        //debugger
         console.log('Error getting Users');
       })
   };
 
   //Axios POST
   const postUsers = function(newUser) {
-    debugger
+    //debugger
     axios.post('https://reqres.in/api/users', newUser)
       .then(shipped => {
-        debugger
+        //debugger
         setUsers([...users, shipped.data]);
       })
       .catch(shipError => {
-        debugger
+        //debugger
         console.log('Error in adding user to List');
       })
       .finally(evt => {
-        debugger
+        //debugger
         updateEntries(defaultValues);
       })
   };
